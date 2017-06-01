@@ -28,7 +28,7 @@ public class Clustering {
 		}while(nClusters>aNumb.size());
 	
 
-		KmeansAlg.cenas(aNumb, nClusters);
+		KmeansAlg.group(aNumb, nClusters);
 			
 	}
 	

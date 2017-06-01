@@ -9,7 +9,13 @@ public class KmeansAlg {
 	static double m[]; // array w/ size of clusters asked, mean!
 	static double diff[]; // distances 
 
-	public static void cenas(ArrayList a, int p) {
+	
+	/**
+	 * 
+	 * @param a arrayList that contains the inserted numbers
+	 * @param p number of clusters requested
+	 */
+	public static void group(ArrayList a, int p) {
 
 		/* Initialising arrays */
 
@@ -43,14 +49,12 @@ public class KmeansAlg {
 
 				k[temp][count[temp]++] = d[i];
 			}
-			 cal_mean(p, n); // call to method which will calculate mean at this
-			// step.
-			 flag=check1(p,n); // check if terminating condition is satisfied.
+			// call to method which will calculate mean at this step.
+			 cal_mean(p, n); 
+			// check if terminating condition is satisfied.
+			 flag=check1(p,n); 
 			if (flag != 1)
-				/*
-				 * Take backup of k in tempk so that you can check for
-				 * equivalence in next step
-				 */
+				// Take backup of k in tempk so that you can check for equivalence in next step
 				for (int i = 0; i < p; ++i)
 					for (int j = 0; j < n; ++j)
 						tempk[i][j] = k[i][j];
