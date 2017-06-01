@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class KmeansAlg {
 	static int d[]; // array w/ nº of the arrayL
 	static int k[][]; // matriz w/ solution
-	static int tempk[][]; // matriz w/ solution
+	static int tempk[][]; // matriz w/ temp solution
 	static double m[]; // array w/ size of clusters asked, mean!
 	static double diff[]; // distances 
 
 	
 	/**
-	 * 
+	 * method to group integers considering their distance
 	 * @param a arrayList that contains the inserted numbers
 	 * @param p number of clusters requested
 	 */
