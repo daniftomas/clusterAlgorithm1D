@@ -83,17 +83,22 @@ public class KmeansAlg {
 	}
 
 	
-	
-	
-	// This method will determine the cluster in which an element go at a
-	// particular step.
+	/**
+	 * This method will determine the cluster in which an element go at a particular step.
+	 * @param a element i of the array
+	 * @param p number of clusters requested
+	 * @return the [i], that represents a cluster,  in which the element will go
+	 */
 	static int cal_diff(int a, int p) {
 		int temp1 = 0;
 		for (int i = 0; i < p; ++i) {
+			diff[i] =  Math.abs(a - m[i]);
+			/*
 			if (a > m[i])
 				diff[i] = a - m[i];
 			else
 				diff[i] = m[i] - a;
+				*/
 		}
 		int val = 0;
 		double temp = diff[0];
@@ -105,9 +110,13 @@ public class KmeansAlg {
 		} // end of for loop
 		return val;
 	}
-
-	static void cal_mean(int p, int n) // This method will determine
-										// intermediate mean values
+	
+/**
+ *  This method will determine intermediate mean values
+ * @param p number of clusters requested
+ * @param n number of elements  of the array inserted
+ */
+	static void cal_mean(int p, int n) 
 	{
 		for (int i = 0; i < p; ++i)
 			m[i] = 0; // initializing means to 0
@@ -124,9 +133,13 @@ public class KmeansAlg {
 		}
 	}
 
-	static int check1(int p, int n) // This checks if previous k ie. tempk and
-									// current k are same.Used as terminating
-									// case.
+	/**
+	 * // This checks if previous k( tempk) and current k are same.Used as terminating  case. Validates solution.
+	 * @param p number of clusters requested
+	 * @param n number of elements of the array inserted
+	 * @return 1 if the tempK is equal to the solution, 0 if its not.
+	 */
+	static int check1(int p, int n) 
 	{
 		for (int i = 0; i < p; ++i)
 			for (int j = 0; j < n; ++j)

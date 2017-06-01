@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Clustering {
 
 	public static void main(String[] args) {
-System.out.println("raios");
+
 		
 		ArrayList<Integer> aNumb = new ArrayList<Integer>();
 		int nClusters;
