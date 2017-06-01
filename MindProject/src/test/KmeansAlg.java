@@ -6,7 +6,7 @@ public class KmeansAlg {
 	static int d[]; // array w/ nº of the arrayL
 	static int k[][]; // matriz w/ solution
 	static int tempk[][]; // matriz w/ temp solution
-	static double m[]; // array w/ size of clusters asked, mean!
+	static double m[]; // array w/ size of clusters asked, means
 	static double diff[]; // distances 
 
 	
@@ -31,6 +31,7 @@ public class KmeansAlg {
 		m = new double[p]; //means
 		diff = new double[p]; //diferences
 		int count[] = new int[p]; // column position in the solution K
+		
 		/* Initializing m */
 		for (int i = 0; i < p; ++i)
 			m[i] = d[i];
@@ -38,23 +39,26 @@ public class KmeansAlg {
 		int temp = 0;
 		int flag = 0;
 		do {
+			//create matriz w/ -1 elements
 			for (int i = 0; i < p; ++i)
 				for (int j = 0; j < n; ++j) {
 					k[i][j] = -1;
 				}
-			for (int i = 0; i < n; ++i) // for loop will cal cal_diff(int) for
-										// every element.
+			// for loop will cal cal_diff(int) for  every element.
+			for (int i = 0; i < n; ++i) 
 			{
 				temp = cal_diff(d[i], p);
 
 				k[temp][count[temp]++] = d[i];
 			}
+			
 			// call to method which will calculate mean at this step.
 			 cal_mean(p, n); 
+			 
 			// check if terminating condition is satisfied.
 			 flag=check1(p,n); 
 			if (flag != 1)
-				// Take backup of k in tempk so that you can check for equivalence in next step
+				// Take backup of k in tempk so that it can be checked for equivalence in next step
 				for (int i = 0; i < p; ++i)
 					for (int j = 0; j < n; ++j)
 						tempk[i][j] = k[i][j];
@@ -66,7 +70,7 @@ public class KmeansAlg {
 				for (int j = 0; k[i][j] != -1 && j < n - 1; ++j)
 					System.out.print(k[i][j] + " ");
 				System.out.println("}");
-			} // end of for loop
+			} 
 			System.out.println("\nValue of m ");
 			for (int i = 0; i < p; ++i)
 				System.out.print("m" + (i + 1) + "=" + m[i] + "  ");
