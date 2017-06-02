@@ -11,7 +11,6 @@ public class Clustering {
 		ArrayList<Integer> aNumb = new ArrayList<Integer>();
 		int nClusters;
 		
-		//System.out.println("initial size: " + aNumb.size());
 		
 		readArray(aNumb);
 		System.out.println("Final array size: " + aNumb.size());
@@ -115,7 +114,7 @@ public class Clustering {
 					badN=false;
 			}
 		} while (badN);
-		//b.close();
+	
 		return x;
 	
 	}

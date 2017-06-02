@@ -101,9 +101,7 @@ public class KmeansAlg {
 		int temp1 = 0;
 		for (int i = 0; i < p; ++i) {
 			diff[i] = Math.abs(a - m[i]);
-			/*
-			 * if (a > m[i]) diff[i] = a - m[i]; else diff[i] = m[i] - a;
-			 */
+			
 		}
 		int val = 0;
 		double temp = diff[0];
@@ -154,47 +152,3 @@ public class KmeansAlg {
 	}
 }
 
-/*
-Enter the number of elements
-8
-Enter 8 elements:
-2 3 6 8 12 15 18 22
-Enter the number of clusters:
-3
-
-At this step
-Value of clusters
-K1{ 2 }
-K2{ 3 }
-K3{ 6 8 12 15 18 22 }
-Value of m
-m1=2.0  m2=3.0  m3=13.5
-
-At this step
-Value of clusters
-K1{ 2 }
-K2{ 3 6 8 }
-K3{ 12 15 18 22 }
-Value of m
-m1=2.0  m2=5.666666666666667  m3=16.75
-
-At this step
-Value of clusters
-K1{ 2 3 }
-K2{ 6 8 }
-K3{ 12 15 18 22 }
-Value of m
-m1=2.5  m2=7.0  m3=16.75
-
-At this step
-Value of clusters
-K1{ 2 3 }
-K2{ 6 8 }
-K3{ 12 15 18 22 }
-Value of m
-m1=2.5  m2=7.0  m3=16.75
-
-The Final Clusters By Kmeans are as follows:
-K1{ 2 3 }
-K2{ 6 8 }
-K3{ 12 15 18 22 } */
