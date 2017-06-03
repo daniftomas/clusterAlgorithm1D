@@ -10,7 +10,7 @@ public class Clustering {
     	ArrayList<Integer> aNumb = new ArrayList<Integer>();
     	
         int nClusters;
-        int iterations = 20;
+        int iterations = 100;
         FinalSol solutions[] = new FinalSol[iterations];
         
         
@@ -32,11 +32,14 @@ public class Clustering {
 
         } while (nClusters > aNumb.size() || numbOfDiffElements(aNumb) < nClusters);
 
+        
+        
+        //Find n (iterations) solutions
         for (int i = 0; i < iterations; i++) {
             solutions[i] = KmeansAlg.group(aNumb, nClusters);
             
-            System.out.println("Printing solution " + (i+1) + ": ");
-            System.out.println(solutions[i].toString());
+            //System.out.println("Printing solution " + (i+1) + ": ");
+            //System.out.println(solutions[i].toString());
         }
 
         int finalSolIndex = indexFinalSol(solutions, iterations);
@@ -52,7 +55,7 @@ public class Clustering {
         }
         */
         
-        System.out.println("\n\n Best solution found:");
+        System.out.println("\n\nBEST SOLUTION FOUND:");
         System.out.println(solutions[finalSolIndex].toString());
     }
 
@@ -175,12 +178,15 @@ public class Clustering {
     	
     	 double finalDiffTemp = solutions[0].getFinalDiff();
     	 int finalSolIndex = 0;
+    	 System.out.println("Comparing the best solutions found.. ");
          System.out.println("Initial finalDiffTemp: " + finalDiffTemp);
+         System.out.println(solutions[finalSolIndex].toString());
          for (int i = finalSolIndex+1; i < solutions.length; i++) {
              if (solutions[i].getFinalDiff() < solutions[finalSolIndex].getFinalDiff()) {
                  finalDiffTemp = solutions[i].getFinalDiff();
                  finalSolIndex = i;
-                 System.out.println("Switching to a FinalDiffTemp of: " + finalDiffTemp);
+                 System.out.println("Switching to better solution: ");
+                 System.out.println(solutions[finalSolIndex].toString());
              }
          }
          return finalSolIndex;

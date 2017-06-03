@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class KmeansAlg {
-	static int d[]; // array w/ nº of the arrayL
+	static int array[]; // array w/ nº of the arrayL
     static int k[][]; // matriz w/ solution
     static int tempk[][]; // matriz w/ temp solution
     static double m[]; // array w/ size of clusters asked, means
@@ -15,58 +15,56 @@ public class KmeansAlg {
      *
      * @param a arrayList that contains the inserted numbers
      * @param p number of clusters requested
-     * @return
+     * @return solution 
      */
-    public static FinalSol group(ArrayList a, int p) {
+    public static FinalSol group(ArrayList a, int nclust) {
 
-        FinalSol solution = new FinalSol(a.size(), p);
+        FinalSol solution = new FinalSol(a.size(), nclust);
         /* Initialising arrays */
 
-        int n = a.size();// size of the array
+        int arrayS = a.size();
         // turn arrayL to array
-        d = new int[n];
+        array = new int[arrayS];
         for (int i = 0; i < a.size(); i++) {
-            d[i] = (int) a.get(i);
+        	array[i] = (int) a.get(i);
         }
 
-        k = new int[p][n]; // solution
-        tempk = new int[p][n]; // temp solution
-        m = new double[p]; // means
-        diff = new double[p]; // diferences
-        int count[] = new int[p]; // column position in the solution K
+        k = new int[nclust][arrayS]; // solution
+        tempk = new int[nclust][arrayS]; // temp solution
+        m = new double[nclust]; // means
+        diff = new double[nclust]; // diferences
+        int count[] = new int[nclust]; // column position in the solution K
 
         /* Initializing m */
-        for (int i = 0; i < p; ++i) {
-            m[i] = -1;
-        }
-
-        m = getRandomCentroids(d, p);
+         m = getRandomCentroids(array, nclust);
 
         int temp = 0;
         int flag = 0;
         do {
             // create matriz w/ -1 elements
-            for (int i = 0; i < p; ++i) {
-                for (int j = 0; j < n; ++j) {
+            for (int i = 0; i < nclust; ++i) {
+                for (int j = 0; j < arrayS; ++j) {
                     k[i][j] = -1;
                 }
             }
             // for loop will cal cal_diff(int) for every element.
-            for (int i = 0; i < n; ++i) {
-                temp = cal_diff(d[i], p);
+            for (int i = 0; i < arrayS; ++i) {
+                temp = cal_diff(array[i], nclust);
 
-                k[temp][count[temp]++] = d[i];
+                k[temp][count[temp]++] = array[i];
             }
 
             // call to method which will calculate mean at this step.
-            cal_mean(p, n);
+            cal_mean(nclust, arrayS);
 
             // check if terminating condition is satisfied.
-            flag = check1(p, n);
-            if (flag != 1) // Take backup of k in tempk so that it can be checked for  equivalence in next step
+            flag = check1(nclust, arrayS);
+            if (flag != 1) 
+            
+            // Take backup of k in tempk so that it can be checked for  equivalence in next step
             {
-                for (int i = 0; i < p; ++i) {
-                    for (int j = 0; j < n; ++j) {
+                for (int i = 0; i < nclust; ++i) {
+                    for (int j = 0; j < arrayS; ++j) {
                         tempk[i][j] = k[i][j];
                     }
                 }
@@ -86,6 +84,7 @@ public class KmeansAlg {
              for (int i = 0; i < p; ++i)
              System.out.print("m" + (i + 1) + "=" + m[i] + "  ");
              */
+            
             for (int t = 0; t < count.length; t++) {
                 count[t] = 0;
             }
@@ -94,7 +93,7 @@ public class KmeansAlg {
         //set solution
         solution.setCentroid(m);
         solution.setSolution(k);
-        solution.toString();
+        //solution.toString();
 
         /*System.out.println("\n\n\nThe Final Clusters By Kmeans are as follows: ");
          for (int i = 0; i < p; ++i) {
@@ -189,10 +188,11 @@ public class KmeansAlg {
             } while (currentCentroidEqualToPreviousOnes(arrayCent, i));
 
         }
+        /*
         for (int t = 0; t < p; t++) {
             System.out.println("Initial Centroid " + (t+1) + ": " + arrayCent[t]);
         }
-
+        */
         return arrayCent;
     }
 
