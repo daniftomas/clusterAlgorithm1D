@@ -8,17 +8,16 @@ public class Clustering {
     public static void main(String[] args) {
 
     	ArrayList<Integer> aNumb = new ArrayList<Integer>();
-
+    	
         int nClusters;
         int iterations = 20;
         FinalSol solutions[] = new FinalSol[iterations];
-        int finalSolIndex = 0;
+        
         
 
         readArray(aNumb);
         System.out.println("Final array size: " + aNumb.size());
         System.out.println("Array:" + aNumb);
-
         System.out.println("Insira o numero de Clusters:");
 
         do {
@@ -40,7 +39,8 @@ public class Clustering {
             System.out.println(solutions[i].toString());
         }
 
-        
+        int finalSolIndex = indexFinalSol(solutions, iterations);
+        /*
         double finalDiffTemp = solutions[0].getFinalDiff();
         System.out.println("Initial finalDiffTemp: " + finalDiffTemp);
         for (int i = finalSolIndex+1; i < iterations; i++) {
@@ -50,9 +50,10 @@ public class Clustering {
                 System.out.println("Switching to a FinalDiffTemp of: " + finalDiffTemp);
             }
         }
-        System.out.println("\n\n\nFINAL");
+        */
+        
+        System.out.println("\n\n Best solution found:");
         System.out.println(solutions[finalSolIndex].toString());
-        //System.out.println(solutions[finalSolIndex].getFinalDiff());
     }
 
     /**
@@ -162,5 +163,26 @@ public class Clustering {
 
         return numOfDifferentVals;
     }
-
+    
+    
+    /**
+     * Compares all the solutions by their total diff of distances and choose the one that's more precise
+     * @param solutions array of solutions
+     * @param iterations number iterations
+     * @return index of the solution w/ better results
+     */
+    public static int indexFinalSol(FinalSol solutions[], int iterations){
+    	
+    	 double finalDiffTemp = solutions[0].getFinalDiff();
+    	 int finalSolIndex = 0;
+         System.out.println("Initial finalDiffTemp: " + finalDiffTemp);
+         for (int i = finalSolIndex+1; i < solutions.length; i++) {
+             if (solutions[i].getFinalDiff() < solutions[finalSolIndex].getFinalDiff()) {
+                 finalDiffTemp = solutions[i].getFinalDiff();
+                 finalSolIndex = i;
+                 System.out.println("Switching to a FinalDiffTemp of: " + finalDiffTemp);
+             }
+         }
+         return finalSolIndex;
+    }
 }
