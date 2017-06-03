@@ -40,6 +40,7 @@ public class Clustering {
       
         }
 
+        System.out.println("For "+iterations+" iterations.");
         int finalSolIndex = indexFinalSol(solutions, iterations);
     
         
