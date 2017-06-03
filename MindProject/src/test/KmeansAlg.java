@@ -69,22 +69,7 @@ public class KmeansAlg {
                     }
                 }
             }
-
-            /*System.out.println("\n\nAt this step");
-             System.out.println("\nValue of clusters");
-			
-             for (int i = 0; i < p; ++i) {
-             System.out.print("K" + (i + 1) + "{ ");
-             for (int j = 0; k[i][j] != -1 && j < n - 1; ++j)
-             System.out.print(k[i][j] + " ");
-             System.out.println("}");
-             }
-             System.out.println("\nValue of m ");
-			
-             for (int i = 0; i < p; ++i)
-             System.out.print("m" + (i + 1) + "=" + m[i] + "  ");
-             */
-            
+           
             for (int t = 0; t < count.length; t++) {
                 count[t] = 0;
             }
@@ -93,15 +78,7 @@ public class KmeansAlg {
         //set solution
         solution.setCentroid(m);
         solution.setSolution(k);
-        //solution.toString();
-
-        /*System.out.println("\n\n\nThe Final Clusters By Kmeans are as follows: ");
-         for (int i = 0; i < p; ++i) {
-         System.out.print("K" + (i + 1) + "{ ");
-         for (int j = 0; k[i][j] != -1 && j < n - 1; ++j)
-         System.out.print(k[i][j] + " ");
-         System.out.println("}");
-         }*/
+    
         return solution;
     }
 
@@ -188,11 +165,6 @@ public class KmeansAlg {
             } while (currentCentroidEqualToPreviousOnes(arrayCent, i));
 
         }
-        /*
-        for (int t = 0; t < p; t++) {
-            System.out.println("Initial Centroid " + (t+1) + ": " + arrayCent[t]);
-        }
-        */
         return arrayCent;
     }
 

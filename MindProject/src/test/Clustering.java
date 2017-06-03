@@ -37,23 +37,11 @@ public class Clustering {
         //Find n (iterations) solutions
         for (int i = 0; i < iterations; i++) {
             solutions[i] = KmeansAlg.group(aNumb, nClusters);
-            
-            //System.out.println("Printing solution " + (i+1) + ": ");
-            //System.out.println(solutions[i].toString());
+      
         }
 
         int finalSolIndex = indexFinalSol(solutions, iterations);
-        /*
-        double finalDiffTemp = solutions[0].getFinalDiff();
-        System.out.println("Initial finalDiffTemp: " + finalDiffTemp);
-        for (int i = finalSolIndex+1; i < iterations; i++) {
-            if (solutions[i].getFinalDiff() < solutions[finalSolIndex].getFinalDiff()) {
-                finalDiffTemp = solutions[i].getFinalDiff();
-                finalSolIndex = i;
-                System.out.println("Switching to a FinalDiffTemp of: " + finalDiffTemp);
-            }
-        }
-        */
+    
         
         System.out.println("\n\nBEST SOLUTION FOUND:");
         System.out.println(solutions[finalSolIndex].toString());
