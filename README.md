@@ -1,9 +1,9 @@
 # clusterAlgorithm1D
 
-Algorithm that can take as an input an array of Integers and can group them into N groups depending on how close they are to each other. 
+In this project is an algorithm that takes as an input an array of Integers and then group them into N groups depending on how close they are to each other. 
 This can also be called as clustering using distance as criteria.
 
-In this case, it is used the Kmeas method. 
+In this case,for clustering it is used the K-meas method. 
 
 
 ## Things you may want to know
