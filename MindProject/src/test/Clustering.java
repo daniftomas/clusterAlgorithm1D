@@ -20,9 +20,9 @@ public class Clustering {
 			badArray = readArrayInput(aNumb);
 		} while (badArray);
 
-		System.out.println("Final array size: " + aNumb.size());
+		System.out.println("\nFinal array size: " + aNumb.size());
 		System.out.println("Array:" + aNumb);
-		System.out.println("Insira o numero de Clusters:");
+		System.out.println("\nInsira o numero de Clusters:");
 
 		do {
 			nClusters = readInt();
@@ -35,13 +35,13 @@ public class Clustering {
 			}
 
 		} while (nClusters > aNumb.size() || numbOfDiffElements(aNumb) < nClusters);
-
+		
 		if (nClusters == 1) {
 			System.out.println("\n\nBEST SOLUTION FOUND:");
 			System.out.println("K1:" + aNumb);
 		}
 
-		else {
+		else { 
 			// Find n (iterations) solutions
 			for (int i = 0; i < iterations; i++) {
 				solutions[i] = KmeansAlg.group(aNumb, nClusters);
@@ -60,7 +60,6 @@ public class Clustering {
      
     
     
-    
     /**
      * read an Array w/ regular expression
      * 
@@ -77,11 +76,11 @@ public class Clustering {
  		a = new Scanner(System.in);
  		st = a.nextLine();
  		
- 		if (st.matches("(\\s)?[0-9]*(\\s)?,(\\s)?[0-9]*(\\s)?(,(\\s)?[0-9]*(\\s)?)*")) {
- 			try {
- 				String[] items = st.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
+ 		if (st.matches("(\\s)?[0-9]*(\\s)?(,(\\s)?[0-9]*(\\s)?)*")) {
+ 			
+ 				String[] items = st.replaceAll("\\]", "").replaceAll("\\s", "").split(",");
  				
- 				if(items.length==0){
+ 				if(items.length<2){
  					System.out.println("Input not valid. Insert at least 2 Integers.");
  					return badN;
  				}
@@ -89,27 +88,19 @@ public class Clustering {
  				for (int i = 0; i < items.length; i++) {
  					try {
  						x = Integer.parseInt(items[i]);
-
- 						if (x < 0) {
- 							System.out.println("Input not valid. Insert only positive Integers. cenas 1");
- 							break;
- 						}
  						array.add(x);
 
  					} catch (NumberFormatException nfe) {
+ 						//if is a number too long or it doesn't have a number
  						System.out.println("Input not valid. Insert only Integers.");
- 			 			return badN;
+ 			 			array.clear();
+ 						return badN;
  					}
  				}
- 				
- 			} catch (PatternSyntaxException e) {
- 				System.out.println("Input not valid. Insert input as showned in the example.");
- 				return badN;
- 			}
  			return badN=false;
  		}
  		else{
- 			System.out.println("Input not valid. Insert input as showned in the example.\n");
+ 			System.out.println("Input not valid. Insert integers as showned in the example.\n");
  			return badN;
  		}
  	}

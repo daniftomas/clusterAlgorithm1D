@@ -20,7 +20,9 @@ public class KmeansAlg {
     public static FinalSol group(ArrayList a, int nclust) {
     	
 		FinalSol solution = new FinalSol(a.size(), nclust);
-			
+	
+		/* Initialising arrays */
+		
 			// turn arrayL to array
 			array = new int[a.size()];
 			for (int i = 0; i < a.size(); i++) {
