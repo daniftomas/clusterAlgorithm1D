@@ -91,7 +91,7 @@ public class Clustering {
  						array.add(x);
 
  					} catch (NumberFormatException nfe) {
- 						//if is a number too long or it doesn't have a number
+ 						//if is a number too Long or it doesn't have a number
  						System.out.println("Input not valid. Insert only Integers.");
  			 			array.clear();
  						return badN;
