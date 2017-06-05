@@ -123,15 +123,11 @@ public class Clustering {
         boolean badN = true;
         do {
             b = new Scanner(System.in);
-            if (!b.hasNextInt()) {
-                System.out.println("Input not valid. Choose an Integer.");
-                continue;
-
-            } else {
-                try {
+            if (b.hasNextInt()) {
+            	try {
                     x = Integer.parseInt(b.nextLine());
-                    if (x < 0) {
-                        System.out.println("Input not valid. Insert only a positive Integer.");
+                    if (x < 1) {
+                        System.out.println("Input not valid. Insert a Integer bigger than 1.");
                         continue;
                     }
                 } catch (NumberFormatException e) {
@@ -139,6 +135,11 @@ public class Clustering {
                     continue;
                 }
                 badN = false;
+            	           	
+                
+            } else {
+            	System.out.println("Input not valid. Choose a positive Integer.");
+                continue;
             }
         } while (badN);
 
@@ -160,13 +161,8 @@ public class Clustering {
                 diffNum.add((Integer) arrayOfNumbs.get(i));
             }
         }
-
-        if (diffNum.size() == 1) {
-            numOfDifferentVals = 0; // all elements are the same
-        } else {
             numOfDifferentVals = diffNum.size();
-        }
-
+        
         return numOfDifferentVals;
     }
     
