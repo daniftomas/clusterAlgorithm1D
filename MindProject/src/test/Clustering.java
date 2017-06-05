@@ -85,7 +85,7 @@ public class Clustering {
  					return badN;
  				}
  				
- 				for (int i = 0; i < items.length; i++) {
+ 				for (int i = 0; i < items.length; i++){
  					try {
  						x = Integer.parseInt(items[i]);
  						array.add(x);
