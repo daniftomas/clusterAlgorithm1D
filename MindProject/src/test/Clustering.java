@@ -2,6 +2,8 @@ package test;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class Clustering {
 
@@ -12,9 +14,12 @@ public class Clustering {
         int nClusters;
         int iterations = 1000;
         FinalSol solutions[] = new FinalSol[iterations];
+        boolean badArray = true;
         
+        do{
+        badArray=readArrayInput(aNumb);
+        }while(badArray);
         
-        readArray(aNumb);
         System.out.println("Final array size: " + aNumb.size());
         System.out.println("Array:" + aNumb);
         System.out.println("Insira o numero de Clusters:");
@@ -25,14 +30,12 @@ public class Clustering {
             if (nClusters > aNumb.size()) {
                 System.out.println("Must insert a number smaller then the array's size: " + aNumb.size());
             }
-            if (nClusters > numbOfDiffElements(aNumb)) {
+            else if (nClusters > numbOfDiffElements(aNumb)) {
                 System.out.println("Must insert a number less or equal to the number of different elements: " + numbOfDiffElements(aNumb));
             }
 
         } while (nClusters > aNumb.size() || numbOfDiffElements(aNumb) < nClusters);
 
-        
-        
         //Find n (iterations) solutions
         for (int i = 0; i < iterations; i++) {
             solutions[i] = KmeansAlg.group(aNumb, nClusters);
@@ -42,60 +45,65 @@ public class Clustering {
         System.out.println("For "+iterations+" iterations.");
         int finalSolIndex = indexFinalSol(solutions, iterations);
     
-        
         System.out.println("\n\nBEST SOLUTION FOUND:");
         System.out.println(solutions[finalSolIndex].toString());
     }
 
+    
+    
+    
+    
+    
     /**
-     * method to read an array of positive integers and add them to one arraList
-     *
-     * @param enpty arrayList
+     * read an Array w/ regular expression
+     * 
+     * @param arrayList
+     * @return true if it is a valid input, false if it is a invalid input
      */
-    public static void readArray(ArrayList<Integer> array) {
-        Scanner a;
-        int x = 0;
-        String st = "";
-        String stopSign = "end";
-        boolean badN = true;
-        System.out.println("Insert positive integers: \n(write \"" + stopSign + "\" to terminate)");
-        do {
-            a = new Scanner(System.in);
-            //if it has an int
-            if (a.hasNextInt()) {
-                try {
-                    x = Integer.parseInt(a.nextLine());
-                    if (x < 0) {
-                        System.out.println("Input not valid. Insert only positive Integers.");
-                        continue;
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Input not valid. Insert only a Integer.");
-                    continue;
-                }
-                array.add(x);
-                System.out.println("+" + array.size() + " added");
-                badN = false;
-            } else {
-                //if it has String
-                st = a.nextLine();
-                if (st.equals(stopSign)) {
-                    if (!array.isEmpty()) {
-                        System.out.println("end of array");
-                        badN = false;
-                        break;
-                    } else {
-                        System.out.println("The Array is still empty, please insert Integers.");
-                        st = "";
-                        continue;
-                    }
-                } else {
-                    System.out.println("Input not valid. Choose an Integer.");
-                }
-            }
-        } while (!st.equals(stopSign) || badN);
+ 	public static boolean readArrayInput(ArrayList<Integer> array) {
+ 		Scanner a;
+ 		int x = 0;
+ 		String st = "";
+ 		boolean badN = true;
 
-    }
+ 		System.out.println("Insert group of numbers(at least 2 numbers): \nExample:" + "[16, 45, 67, 23, 12, 34, 45, 23, 67, 23, 67]");
+ 		a = new Scanner(System.in);
+ 		st = a.nextLine();
+ 		
+ 		if (st.matches("\\[[0-9]*,[0-9]*(,(\\s)?[0-9]*(\\s)?)*\\]")) {
+ 			try {
+ 				String[] items = st.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
+
+ 				for (int i = 0; i < items.length; i++) {
+ 					try {
+ 						x = Integer.parseInt(items[i]);
+
+ 						if (x < 0) {
+ 							System.out.println("Input not valid. Insert only positive Integers.");
+ 							break;
+ 						}
+ 						array.add(x);
+
+ 					} catch (NumberFormatException nfe) {
+ 						System.out.println("Input not valid. Insert only Integers.");
+ 						break;
+ 					}
+ 					;
+ 				}
+ 			} catch (PatternSyntaxException e) {
+ 				System.out.println("Input not valid. Insert input as showned in the model.");
+
+ 			}
+ 			
+ 			return badN=false;
+ 		}
+ 		else{
+ 			System.out.println("Input not valid. Insert input as showned in the model.\n");
+ 			return badN;
+ 		}
+ 	}
+ 	
+   
 
     /**
      * method to read one positive Int
@@ -180,5 +188,7 @@ public class Clustering {
          return finalSolIndex;
     }
         
+   
+  
     
 }
