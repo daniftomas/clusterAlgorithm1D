@@ -49,16 +49,16 @@ public class KmeansAlg {
             }
             // for loop will cal cal_diff(int) for every element.
             for (int i = 0; i < arrayS; ++i) {
-                temp = cal_diff(array[i], nclust);
+                temp = calDiff(array[i], nclust);
 
                 k[temp][count[temp]++] = array[i];
             }
 
             // call to method which will calculate mean at this step.
-            cal_mean(nclust, arrayS);
+            calMean(nclust, arrayS);
 
             // check if terminating condition is satisfied.
-            flag = check1(nclust, arrayS);
+            flag = check(nclust, arrayS);
             if (flag != 1) 
             
             // Take backup of k in tempk so that it can be checked for  equivalence in next step
@@ -90,7 +90,7 @@ public class KmeansAlg {
      * @param p number of clusters requested
      * @return the [i], that represents a cluster, in which the element will go
      */
-    public static int cal_diff(int a, int p) {
+    public static int calDiff(int a, int p) {
         int temp1 = 0;
         for (int i = 0; i < p; ++i) {
             diff[i] = Math.abs(a - m[i]);
@@ -113,7 +113,7 @@ public class KmeansAlg {
      * @param p number of clusters requested
      * @param n number of elements of the array inserted
      */
-    public static void cal_mean(int p, int n) {
+    public static void calMean(int p, int n) {
         for (int i = 0; i < p; ++i) {
             m[i] = 0; // initializing means to 0
         }
@@ -138,7 +138,7 @@ public class KmeansAlg {
      * @param n number of elements of the array inserted
      * @return 1 if the tempK is equal to the solution, 0 if its not.
      */
-    public static int check1(int p, int n) {
+    public static int check(int p, int n) {
         for (int i = 0; i < p; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (tempk[i][j] != k[i][j]) {

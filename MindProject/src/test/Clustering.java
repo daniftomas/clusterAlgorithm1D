@@ -10,11 +10,10 @@ public class Clustering {
     	ArrayList<Integer> aNumb = new ArrayList<Integer>();
     	
         int nClusters;
-        int iterations = 100;
+        int iterations = 1000;
         FinalSol solutions[] = new FinalSol[iterations];
         
         
-
         readArray(aNumb);
         System.out.println("Final array size: " + aNumb.size());
         System.out.println("Array:" + aNumb);
@@ -180,4 +179,6 @@ public class Clustering {
          }
          return finalSolIndex;
     }
+        
+    
 }
