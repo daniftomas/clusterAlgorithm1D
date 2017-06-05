@@ -12,6 +12,7 @@ public class FinalSol {
         this.nClust = p;
         this.n = numbEle;
         finalDiff = 0;
+        centroid= new double[p];
     }
 
     public int[][] getSolution() {

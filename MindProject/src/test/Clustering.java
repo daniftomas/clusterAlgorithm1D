@@ -9,48 +9,55 @@ public class Clustering {
 
     public static void main(String[] args) {
 
-    	ArrayList<Integer> aNumb = new ArrayList<Integer>();
-    	
-        int nClusters;
-        int iterations = 1000;
-        FinalSol solutions[] = new FinalSol[iterations];
-        boolean badArray = true;
-        
-        do{
-        badArray=readArrayInput(aNumb);
-        }while(badArray);
-        
-        System.out.println("Final array size: " + aNumb.size());
-        System.out.println("Array:" + aNumb);
-        System.out.println("Insira o numero de Clusters:");
+		ArrayList<Integer> aNumb = new ArrayList<Integer>();
 
-        do {
-            nClusters = readInt();
+		int nClusters;
+		int iterations = 1000;
+		FinalSol solutions[] = new FinalSol[iterations];
+		boolean badArray = true;
 
-            if (nClusters > aNumb.size()) {
-                System.out.println("Must insert a number smaller then the array's size: " + aNumb.size());
-            }
-            else if (nClusters > numbOfDiffElements(aNumb)) {
-                System.out.println("Must insert a number less or equal to the number of different elements: " + numbOfDiffElements(aNumb));
-            }
+		do {
+			badArray = readArrayInput(aNumb);
+		} while (badArray);
 
-        } while (nClusters > aNumb.size() || numbOfDiffElements(aNumb) < nClusters);
+		System.out.println("Final array size: " + aNumb.size());
+		System.out.println("Array:" + aNumb);
+		System.out.println("Insira o numero de Clusters:");
 
-        //Find n (iterations) solutions
-        for (int i = 0; i < iterations; i++) {
-            solutions[i] = KmeansAlg.group(aNumb, nClusters);
-      
-        }
+		do {
+			nClusters = readInt();
 
-        System.out.println("For "+iterations+" iterations.");
-        int finalSolIndex = indexFinalSol(solutions, iterations);
-    
-        System.out.println("\n\nBEST SOLUTION FOUND:");
-        System.out.println(solutions[finalSolIndex].toString());
-    }
+			if (nClusters > aNumb.size()) {
+				System.out.println("Must insert a number smaller or equal then the array's size: " + aNumb.size());
+			} else if (nClusters > numbOfDiffElements(aNumb)) {
+				System.out.println("Must insert a number smaller or equal to the number of different elements: "
+						+ numbOfDiffElements(aNumb));
+			}
 
-    
-    
+		} while (nClusters > aNumb.size() || numbOfDiffElements(aNumb) < nClusters);
+
+		if (nClusters == 1) {
+			System.out.println("\n\nBEST SOLUTION FOUND:");
+			System.out.println("K1:" + aNumb);
+		}
+
+		else {
+			// Find n (iterations) solutions
+			for (int i = 0; i < iterations; i++) {
+				solutions[i] = KmeansAlg.group(aNumb, nClusters);
+
+			}
+
+			System.out.println("For " + iterations + " iterations.");
+			int finalSolIndex = indexFinalSol(solutions, iterations);
+
+			System.out.println("\n\nBEST SOLUTION FOUND:");
+			System.out.println(solutions[finalSolIndex].toString());
+
+		}
+
+	}
+     
     
     
     
@@ -66,11 +73,11 @@ public class Clustering {
  		String st = "";
  		boolean badN = true;
 
- 		System.out.println("Insert group of numbers(at least 2 numbers): \nExample:" + "[16, 45, 67, 23, 12, 34, 45, 23, 67, 23, 67]");
+ 		System.out.println("Insert group of numbers(at least 2 numbers): \nExample:" + " 16, 45, 67, 23, 12, 34, 45, 23, 67, 23, 67");
  		a = new Scanner(System.in);
  		st = a.nextLine();
  		
- 		if (st.matches("\\[[0-9]*,[0-9]*(,(\\s)?[0-9]*(\\s)?)*\\]")) {
+ 		if (st.matches("(\\s)?[0-9]*(\\s)?,(\\s)?[0-9]*(\\s)?(,(\\s)?[0-9]*(\\s)?)*")) {
  			try {
  				String[] items = st.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
 
@@ -91,14 +98,14 @@ public class Clustering {
  					;
  				}
  			} catch (PatternSyntaxException e) {
- 				System.out.println("Input not valid. Insert input as showned in the model.");
+ 				System.out.println("Input not valid. Insert input as showned in the example.");
 
  			}
  			
  			return badN=false;
  		}
  		else{
- 			System.out.println("Input not valid. Insert input as showned in the model.\n");
+ 			System.out.println("Input not valid. Insert input as showned in the example.\n");
  			return badN;
  		}
  	}

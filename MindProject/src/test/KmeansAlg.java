@@ -18,68 +18,68 @@ public class KmeansAlg {
      * @return solution 
      */
     public static FinalSol group(ArrayList a, int nclust) {
+    	
+		FinalSol solution = new FinalSol(a.size(), nclust);
+			
+			// turn arrayL to array
+			array = new int[a.size()];
+			for (int i = 0; i < a.size(); i++) {
+				array[i] = (int) a.get(i);
+			}
+			
+			k = new int[nclust][a.size()]; // solution
+			tempk = new int[nclust][a.size()]; // temp solution
+			m = new double[nclust]; // means
+			diff = new double[nclust]; // diferences
+			int count[] = new int[nclust]; // column position in the solution K
 
-        FinalSol solution = new FinalSol(a.size(), nclust);
-        /* Initialising arrays */
+			/* Initializing m */
+			m = getRandomCentroids(array, nclust);
 
-        int arrayS = a.size();
-        // turn arrayL to array
-        array = new int[arrayS];
-        for (int i = 0; i < a.size(); i++) {
-        	array[i] = (int) a.get(i);
-        }
+			int temp = 0;
+			int flag = 0;
+			do {
+				// create matriz w/ -1 elements
+				for (int i = 0; i < nclust; ++i) {
+					for (int j = 0; j < a.size(); ++j) {
+						k[i][j] = -1;
+					}
+				}
+				// for loop will cal cal_diff(int) for every element.
+				for (int i = 0; i < a.size(); ++i) {
+					temp = calDiff(array[i], nclust);
 
-        k = new int[nclust][arrayS]; // solution
-        tempk = new int[nclust][arrayS]; // temp solution
-        m = new double[nclust]; // means
-        diff = new double[nclust]; // diferences
-        int count[] = new int[nclust]; // column position in the solution K
+					k[temp][count[temp]++] = array[i];
+				}
 
-        /* Initializing m */
-         m = getRandomCentroids(array, nclust);
+				// call to method which will calculate mean at this step.
+				calMean(nclust, a.size());
 
-        int temp = 0;
-        int flag = 0;
-        do {
-            // create matriz w/ -1 elements
-            for (int i = 0; i < nclust; ++i) {
-                for (int j = 0; j < arrayS; ++j) {
-                    k[i][j] = -1;
-                }
-            }
-            // for loop will cal cal_diff(int) for every element.
-            for (int i = 0; i < arrayS; ++i) {
-                temp = calDiff(array[i], nclust);
+				// check if terminating condition is satisfied.
+				flag = check(nclust, a.size());
+				if (flag != 1)
 
-                k[temp][count[temp]++] = array[i];
-            }
+				// Take backup of k in tempk so that it can be checked for
+				// equivalence in next step
+				{
+					for (int i = 0; i < nclust; ++i) {
+						for (int j = 0; j < a.size(); ++j) {
+							tempk[i][j] = k[i][j];
+						}
+					}
+				}
 
-            // call to method which will calculate mean at this step.
-            calMean(nclust, arrayS);
+				for (int t = 0; t < count.length; t++) {
+					count[t] = 0;
+				}
+			} while (flag == 0);
 
-            // check if terminating condition is satisfied.
-            flag = check(nclust, arrayS);
-            if (flag != 1) 
-            
-            // Take backup of k in tempk so that it can be checked for  equivalence in next step
-            {
-                for (int i = 0; i < nclust; ++i) {
-                    for (int j = 0; j < arrayS; ++j) {
-                        tempk[i][j] = k[i][j];
-                    }
-                }
-            }
-           
-            for (int t = 0; t < count.length; t++) {
-                count[t] = 0;
-            }
-        } while (flag == 0);
+			// set solution
+			solution.setCentroid(m);
+			solution.setSolution(k);
 
-        //set solution
-        solution.setCentroid(m);
-        solution.setSolution(k);
-    
-        return solution;
+		
+		return solution;
     }
 
     /**
