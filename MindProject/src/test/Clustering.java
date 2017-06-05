@@ -73,35 +73,39 @@ public class Clustering {
  		String st = "";
  		boolean badN = true;
 
- 		System.out.println("Insert group of numbers(at least 2 numbers): \nExample:" + " 16, 45, 67, 23, 12, 34, 45, 23, 67, 23, 67");
+ 		System.out.println("Insert group of positive numbers(at least 2 Integers): \nExample:" + " 16, 45, 67, 23, 12, 34, 45, 23, 67, 23, 67");
  		a = new Scanner(System.in);
  		st = a.nextLine();
  		
  		if (st.matches("(\\s)?[0-9]*(\\s)?,(\\s)?[0-9]*(\\s)?(,(\\s)?[0-9]*(\\s)?)*")) {
  			try {
  				String[] items = st.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
-
+ 				
+ 				if(items.length==0){
+ 					System.out.println("Input not valid. Insert at least 2 Integers.");
+ 					return badN;
+ 				}
+ 				
  				for (int i = 0; i < items.length; i++) {
  					try {
  						x = Integer.parseInt(items[i]);
 
  						if (x < 0) {
- 							System.out.println("Input not valid. Insert only positive Integers.");
+ 							System.out.println("Input not valid. Insert only positive Integers. cenas 1");
  							break;
  						}
  						array.add(x);
 
  					} catch (NumberFormatException nfe) {
  						System.out.println("Input not valid. Insert only Integers.");
- 						break;
+ 			 			return badN;
  					}
- 					;
  				}
+ 				
  			} catch (PatternSyntaxException e) {
  				System.out.println("Input not valid. Insert input as showned in the example.");
-
+ 				return badN;
  			}
- 			
  			return badN=false;
  		}
  		else{
@@ -177,8 +181,8 @@ public class Clustering {
     	
     	 double finalDiffTemp = solutions[0].getFinalDiff();
     	 int finalSolIndex = 0;
-    	 System.out.println("Comparing the best solutions found.. ");
-         System.out.println("Initial finalDiffTemp: " + finalDiffTemp);
+    	 System.out.println("Comparing the best solutions found... ");
+         System.out.println("Initial Diff of distances: " + finalDiffTemp);
          System.out.println(solutions[finalSolIndex].toString());
          for (int i = finalSolIndex+1; i < solutions.length; i++) {
              if (solutions[i].getFinalDiff() < solutions[finalSolIndex].getFinalDiff()) {

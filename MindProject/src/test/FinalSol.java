@@ -50,11 +50,11 @@ public class FinalSol {
         st += "Total Sum of Diff of distances for this solution: " + finalDiff;
         st += "\nThe Final Clusters By Kmeans are as follows:\n";
         for (int i = 0; i < nClust; ++i) {
-            st += "K" + (i + 1) + "{ ";
+            st += "K" + (i + 1) + "[ ";
             for (int j = 0; solution[i][j] != -1 && j < n - 1; ++j) {
                 st += solution[i][j] + " ";
             }
-            st += "}\n";
+            st += "]\n";
         }
         return st;
     }
