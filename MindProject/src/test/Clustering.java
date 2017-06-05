@@ -53,7 +53,6 @@ public class Clustering {
 
 			System.out.println("\n\nBEST SOLUTION FOUND:");
 			System.out.println(solutions[finalSolIndex].toString());
-
 		}
 
 	}
