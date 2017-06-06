@@ -58,7 +58,6 @@ public class Clustering {
 	}
      
     
-    
     /**
      * read an Array w/ regular expression
      * 
@@ -73,14 +72,13 @@ public class Clustering {
 
  		System.out.println("Insert group of positive numbers(at least 2 Integers): \nExample:" + " 16, 45, 67, 23, 12, 34, 45, 23, 67, 23, 67");
  		a = new Scanner(System.in);
- 		st = a.nextLine();
- 		
- 		if (st.matches("(\\s)?[0-9]*(\\s)?(,(\\s)?[0-9]*(\\s)?)*")) {
+ 		st=a.nextLine();
+ 		if (st.matches("(\\s)*[0-9]+(\\s)*(,(\\s)*[0-9]+(\\s)*)*")) {
  			
- 				String[] items = st.replaceAll("\\]", "").replaceAll("\\s", "").split(",");
+ 				String[] items = st.replaceAll("\\s", "").split(",");
  				
  				if(items.length<2){
- 					System.out.println("Input not valid. Insert at least 2 Integers.");
+ 					System.out.println("Input not valid. Insert at least 2 Integers.\n");
  					return badN;
  				}
  				
@@ -90,8 +88,8 @@ public class Clustering {
  						array.add(x);
 
  					} catch (NumberFormatException nfe) {
- 						//if is a number too Long or it doesn't have a number
- 						System.out.println("Input not valid. Insert only Integers.");
+ 						//if is a number too Long 
+ 						System.out.println("Input not valid. Insert only Integers.\n");
  			 			array.clear();
  						return badN;
  					}
@@ -104,39 +102,44 @@ public class Clustering {
  		}
  	}
  	
-   
 
     /**
      * method to read one positive Int
      *
      * @return return a integer
      */
-    public static int readInt() {
+ 	public static int readInt() {
         Scanner b;
         int x = 0;
+        String st="";
+        
         boolean badN = true;
         do {
+        	
             b = new Scanner(System.in);
-            if (b.hasNextInt()) {
+            st=b.nextLine();
+           
+            if (st.matches("(\\s)*[0-9]+(\\s)*") ) {
+            	st=st.replaceAll("\\s", "");
             	try {
-                    x = Integer.parseInt(b.nextLine());
+                    x = Integer.parseInt(st);
                     if (x < 1) {
-                        System.out.println("Input not valid. Insert a Integer bigger than 1.");
+                        System.out.println("Input not valid. Insert a Integer equal or bigger than 1.");
                         continue;
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Input not valid. Insert only a Integer.");
                     continue;
                 }
+            	
                 badN = false;
-            	           	
-                
+            	           	     
             } else {
             	System.out.println("Input not valid. Choose a positive Integer.");
                 continue;
-            }
+            } 
         } while (badN);
-
+      
         return x;
     }
 
@@ -184,8 +187,5 @@ public class Clustering {
          }
          return finalSolIndex;
     }
-        
-   
-  
     
 }
